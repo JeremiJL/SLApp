@@ -1,0 +1,38 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+    <div class="container-sm w-50 text-center mb-5">
+
+        <h2 class="py-3">WYBIERZ PROJEKT</h2>
+
+    </div>
+    
+    <div class="container-sm w-50 justify-content-center mt-auto">
+
+        <div class="row row-cols-3 h-50">
+
+            <div class="col mb-2 text-center">
+                <a href="{{ url_for('select_date_and_raport_and_api_key', project='B') }}" class="btn btn-dark border-0 btn-lg h-100 w-100" name="BO">BO</a>
+            </div>
+
+            <div class="col mb-2 text-center">
+                <a href="{{ url_for('select_date_and_raport_and_api_key', project='A') }}" class="btn btn-dark border-0 btn-lg h-100 w-100" name="KS">KS</a>
+            </div>
+
+            <div class="col mb-2 text-center">
+                <a href="{{ url_for('select_date_and_raport_and_api_key', project='C') }}" class="btn btn-dark border-0 btn-lg h-100 w-100" name="PWDJ">PWDJ</a>
+            </div>
+
+            <div class="col mb-2 text-center">
+                <a href="{{ url_for('select_date_and_raport_and_api_key', project='D') }}" class="btn btn-dark border-0 btn-lg h-100 w-100" name="PIUW">PIUW</a>
+            </div>
+        
+            <div class="col mb-2 text-center">
+                <a href="{{ url_for('select_date_and_raport_and_api_key', project='JSP') }}" class="btn btn-dark border-0 btn-lg h-100 w-100 disabled" aria-disabled="true" name="JSP">JSP</a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

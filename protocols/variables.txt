@@ -1,0 +1,6 @@
+{{ MONTH }}
+{{ MONTH_NAME }}
+{{ NEXT_MONTH }}
+{{ YEAR }}
+{{ NUMBER_OF_DAYS_IN_MONTH }}
+{{ DAY }}

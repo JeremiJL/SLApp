@@ -1,0 +1,3 @@
+path:
+  serialized_records_codes: serialization/analysis_generation_counter.txt
+  serialized_count_of_correctly_analyzed_tickets: serialization/correctly_analyzed_tickets_counter.txt

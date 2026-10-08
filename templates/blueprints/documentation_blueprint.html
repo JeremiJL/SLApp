@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    {% include 'fragments/head.html' %}
+    
+    <body>
+
+        {% include 'fragments/navigation.html' %}
+
+        <div class="container">
+
+            <h2 class="py-3 text-center mb-5">DOKUMENTACJA</h2>
+            
+            <ul id="documentation-nav" class="nav nav-tabs mb-4">
+                <li class="nav-item">
+                    <a class="nav-link text-dark {{ user_page_active }}" href="{{ url_for('user_documentation') }}">Dokumentacja
+                        użytkownika</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark {{ config_page_active }}"
+                        href="{{ url_for('configuration_documentation') }}">Konfigurowanie SLApp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark {{ dev_page_active }}" href="{{ url_for('developer_documentation') }}">Dokumentacja
+                        dla developera</a>
+                </li>
+            </ul>
+            
+            <div class="documentation_content justify-content-center mx-2">
+                {% block content %}{% endblock %}
+            </div>
+            
+        </div>
+
+        {% include 'fragments/footer.html' %}
+
+    </body>
+</html>
+

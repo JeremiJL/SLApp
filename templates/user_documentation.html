@@ -1,0 +1,97 @@
+{% extends 'blueprints/documentation_blueprint.html' %}
+
+
+{% block content %}
+    
+    <p><b>Do czego służy SLApp?</b></p>
+    <p>
+        SLApp to narzędzie automatyzujące proces liczenia całkowitego czasu wykorzystanego przez wykonawce do rozwiązania
+        problemów zgłoszonych poprzez systemy ticket'owe. Aplikacja jest świadoma zasad umowy SLA związanych z projektem i analizuję wyliczenia
+        pod kątem zasad spisanych w umowie.
+    </p>
+
+    <hr class="my-4">
+
+    <p><b>Jak korzystać z SLApp?</b></p>
+    <p>
+        Pierwszym krokiem jest wybór projektu spośród listy projektów objętych przez program SLApp. Następnie należy podać klucz dostępu do źródła 
+        danych o zgłoszeniach (np. Redmine). Jako, że zasadniczą rolą SLApp jest analiza porównawcza obliczeń algorytmu z obliczeniami przekazanymi przez wykonawce w raporcie, oraz poinformowanie użytkownika o potencjalnych rozbieżnościach,
+        kolejnym krokiem będzie dostarczenie SLApp raportu wykonawcy za wybrany przez użytkownika miesiąc. Ostatnimi parametrami wymaganymi przez aplikację jest miesiąc oraz rok, za który użytkownik życzy sobie dokonać analizy.
+    </p>
+    <p>
+        Po wprowadzeniu wszystkich koniecznych paremetrów przez użytkownika, SLApp pobiera dane o zgłoszeniach ze źródła, a następnie analizuje je pod kątem umowy SLA.
+    </p>
+    <p>
+        Po skończonej analizie danych SLApp oferuje użytkownikowi wybór formatu pliku wynikowego który zestawia ze sobą przeanalizowane dane ze źródła oraz dane z raportu.
+        Format XLSX cechuję się lepszą czytelnością od formatu TXT. 
+        <br>
+        Wyróżniającą format TXT funckjonalnością jest wizualizacja interwałów na podstawie których algorytm wyliczył sumaryczny czas rozwiązywania danego zgłoszenia.
+        Poprzez interwały rozumie się okresy czasowe podczas których odpowiedzialność nad zgłoszeniem powierzona jest wykonawcy. Interwał jest reprezentowany przez czas i datę rozpoczęcia go oraz zakończenia.
+        Informacja ta jest pomocna w procesie 'debugowania' algorytmu i doszukiwania się odpowiedzi na to 'jak algorytm doszedł do swoich obliczeń'.
+    </p>
+
+    <hr class="my-4">
+    <p><b>Poradnik video.</b></p>
+    <p>Przykład użycia SLApp do wygenerowania analizy dla projektu PIUW w formacie XLSX.</p>
+    <video class="w-100 border rounded border-secondary" controls>
+        <source src="../static/images/documentation/video-tutorial-piuw.mp4" type="video/mp4">
+    </video>
+
+    <hr class="my-4">
+
+    <p><b>Diagram aktywności SLApp.</b></p>
+    <p>Poniższy diagram prezentuję proces generacji analizy z użyciem SLApp z wyszczególnieniem roli użytkownika oraz aplikacji w wspomnianym procesie.</p>
+    <img class="w-100" src="../static/images/documentation/flow.svg">
+
+    <hr class="my-4">
+
+    <p><b>Jak interpretować analizę SLApp w formacie XLSX?</b></p>
+    <p>
+        Analiza w formacie XLSX składa się z wierszów reprezentujących poszczególne zgłoszenia z wybranego miesiąca. Wiersze w kolorze niebieskim
+        reprezentują dane o zgłoszeniach pozyskane bezpośrednio ze źródła (np. Redmine) oraz wyliczone przez algorytm SLApp. Natomiast wiersze w kolorze czerwonym
+        reprezentują dane o zgłoszeniach pozyskane z raportu wykonawcy.
+    </p>
+    <p>
+        Kolumny 'Różnica' oraz 'Komentarz' prezentują użytkownikowi rozbieżności pomiędzy danymi z źródła oraz danymi z raportu. W przypadku alarmująco istotnych
+        rozbieżności pomiędzy obliczonym czasem rozwiązania zgłoszenia, a czasem rozwiązania zgłoszenia pobranym z raportu, program sygnalizuję różnice żółtym kolorem.
+    </p>
+    <p>
+        Przewidywany schemat pracy użytkownika z system SLApp, oczekuje od użytkownika manualnego sprawdzenia zgłoszeń zabarwionych na alarmująco-żółty kolor. W celu usprawnienia
+        tej procedury format XLSX dostarcza linku do każdego zgłoszenia w ostatniej kolumnie. Symboliczna kolorystyka, czyli zieleń dla zgłoszeń dla których wyliczenia pokrywają się z tymi
+        z raportu, oraz żółć dla zgłoszeń dla których zachodzi rozbieżność, pozwala szybko zorientować się użytkownikowi o stanie analizy.
+    </p>
+    <p>
+       W przypadki jeśli jakaś informacja o zgłoszeniu jest nieobecna w raporcie wykonawcy, użytkownik jest poinformowany o tym wartością 'Brak danych' w odpowiedniej komórce.
+       Może zdażyć się również sytuacja, że całe zgłoszenie zostało pominięte w raporcie. Kolumna 'Liczba brakujących zgłoszeń w raporcie' informuje o takich przypadkach.
+    </p>
+
+    <img class="w-100 rounded border border-secondary" src="../static/images/documentation/result-example.png">
+
+    <hr class="my-4">
+
+    <p><b>Możliwe przyczyny rozbieżności pomiędzy wyliczeniami SLApp oraz raportem wykonawcy.</b></p>
+    <p>
+        Zdażają się przypadki w których obliczenia algorytmu SLApp będą rozbieżne z obliczeniami po stronie wykonawcy.
+        Można wyróżnić 3 powody takich zjawisk :
+        <ul>
+            <li>
+                Wyliczenia z raportu nieodwzierciedlają rzeczywistości - <b>błąd po stronie wykonawcy.</b>
+            </li>
+            <li>
+                Algorytm SLApp niepoprawnie przeanalizował informację o zgłoszeniach ze źródła - <b>błąd po stronie algorytmu.</b>
+            </li>
+            <li>
+                Użytkownik niepoprawnie użył systemu ticket'owego myląc tym sposobem algorytm SLApp - <b>błąd po stronie użytkownika.</b>
+                <br> Przykładem takiego zjawiska może być nieintencjonalne ustawienie statusu zgłoszenia na 'Zakończony' w systemie Redmine.
+                SLApp nie jest w stanie w takim przypadku stanie ocenić czy działanie użytkownika było spowodowane omyłką, czy też było zamierzone.
+            </li>
+        </ul>
+        W każdym przypadku gdy SLApp informuję użytkownika o rozbieżności w obliczeniach, odpowiedzialnością użytkownika jest manualne sprawdzenie
+        zgłoszenia i upewnienie się do którego z powyżej wymienionych przypadków należy zgłoszenie.  
+    </p>
+
+    
+
+{% endblock %}
+
+

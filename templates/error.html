@@ -1,0 +1,24 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+    <div class="container-sm w-50 my-3">
+
+        <h2 id="alarming_text" class="py-3 mb-2 text-center">Wystąpił Błąd</h2>
+
+        <p class="pt-2 text-center">
+            {{ exception.cause }}
+        </p>
+        <p class="pt-2 text-center">
+            {{ exception.advice }}
+        </p>
+
+    </div>
+
+    <div class="container-fluid text-center w-50 my-5 py-2">
+    
+        <button class="btn btn-dark border-0 btn-lg" onclick="history.back()">Powróć</button>
+    
+    </div>
+
+{% endblock %}

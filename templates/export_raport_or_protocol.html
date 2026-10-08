@@ -1,0 +1,63 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+<div class="container-fluid text-center w-50 mb-2">
+
+    <h3>Całość zajeła tylko <b>{{ total_time_taken }}</b>.</h3>
+    <h3>SLApp zaoszczędził <b>{{ time_saved }}</b> twojego czasu.</h3>
+    
+</div>
+
+<div class="container-sm w-50 text-center mb-2">
+    <hr>
+</div>
+
+<div class="container-sm w-50 text-center mb-3">
+
+    <h2 class="py-3">POBIERZ ANALIZĘ W WYBRANYM FORMACIE</h2>
+
+</div>
+
+<div class="container-sm w-50 justify-content-center">
+    <div class="row h-50 py-2 my-2">
+
+        <div class="col text-center">
+            <a href="{{ url_for('download_raport', format='XLSX') }}" class="btn btn-lg btn-dark border-0 w-100" name="XLSX" target="_blank">
+                <img src="../static/images/file-download.svg" width="32" height="32">
+                Plik Excel
+            </a>
+        </div>
+
+        <div class="col text-center">
+            <a href="{{ url_for('download_raport', format='TXT') }}" class="btn btn-lg btn-dark border-0 w-100" name="TXT" target="_blank">
+                <img src="../static/images/file-download.svg" width="32" height="32">
+                Plik TXT
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% if protocol_support == True %}
+
+    <div class="container-sm w-50 text-center my-5">
+
+        <h2 class="py-3">POBIERZ PROTOKÓŁ ODBIORU</h2>
+
+    </div>
+
+    <div class="container-sm w-50 justify-content-center mb-5">
+        <div class="row h-50 py-2 my-2">
+
+            <div class="col text-center">
+                <a href="{{ url_for('download_protocol') }}" class="btn btn-lg btn-dark border-0 w-50" target="_blank">
+                    <img src="../static/images/file-download.svg" width="32" height="32">
+                    Protokół odbioru
+                </a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

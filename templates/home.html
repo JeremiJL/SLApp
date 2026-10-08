@@ -1,0 +1,29 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+
+    <div class="container-fluid text-center w-50 mb-5">
+
+        <h3>SLApp wygenerował już <b>{{ count_of_analysis }}</b> analiz SLA.</h3>
+        <h3>Łącznie zaoszczędzono <b>{{ time_saved }}</b> użytkowników!</h3>
+
+    </div>
+
+    <div class="container-sm w-50 mb-5 text-center">
+        
+        <h1 class="py-2">SLApp</h1>
+
+        <h3>
+            Rozlicz wykonawcę z aplikacją SLApp.
+        </h3>
+
+    </div>
+
+    <div class="container-fluid text-center w-50 mb-5">
+
+        <a class="btn btn-dark border-0 btn-lg" href="{{ url_for('select_project') }}">Generuj analizę SLA</a>
+
+    </div>
+
+{% endblock %}

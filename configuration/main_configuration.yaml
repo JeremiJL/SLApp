@@ -1,0 +1,5 @@
+path:
+  raport:
+    input: data/input/raports/
+
+projects_supporting_protocol_generation: ['D',]

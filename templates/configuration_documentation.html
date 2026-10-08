@@ -1,0 +1,182 @@
+{% extends 'blueprints/documentation_blueprint.html' %}
+
+{% block content %}
+
+    <p><b>Czym jest konfigurowanie SLApp?</b></p>
+    <p>
+        Struktura aplikacji SLApp cechuję się elastycznością i modularnością. To podejście do projektu zapewnia łatwą integrację aplikacji z
+        nowym środowiskiem, interpretacje nowych umowów SLA, a także pracę z alternatywami systemów ticketowych.
+    </p>
+    <p>
+       Jednym z narzędzi wspierających elastyczność aplikacji jest zastosowanie plików konfiguracyjnych. Pliki konfiguraycjne pozwalają
+       programiście wydelegowanie istotnych zmiennych na zawnątrz kodu, a użytkownikowi na łatwą edycje działania programu bez znajomości technik programowania.  
+    </p>
+
+    <hr class="my-4">
+
+    <p><b>Które elementy SLApp podlegają konfiguracji?</b></p>
+    <p>Użytkownik SLApp ma możliwość na konfigurowanie dwóch aspektów narzędzia. </p>
+    <ul>
+        <li>
+            Konfigurowanie projektów
+        </li>
+        <li>
+            Konfigurowanie szablonów protokołów odbioru
+        </li>
+    </ul>
+    Następne sekcje detalicznie omówią pracę z plikami konfiguracyjnymi obu tych kategorii.
+
+    <hr class="my-4">
+
+    <p><b>Praca z plikami konfiguracyjnymi projektów</b></p>
+
+    <p>
+        Pliki konfiguracyjne dla projektów napisane są w formacie YAML. Format wyróżnia jego czytelność i łatwość w obsłudze. Poniższa lista
+        pojęć prezentuję syntax YAML.
+    </p>
+
+    <ul>
+        <li><b>Komentarze</b> w pliku zaczynają się od znaku # na początku lini</li>
+        <li>Plik składa się z par 'nazwa zmiennej' <b>:</b> 'wartość zmiennej'</li>
+        <li><b>Wcięcia</b> lini pozwalają grupować ze sobą powiązane logicznie zmienne</li>
+        <li>Wartością zmiennej może być <b>lista</b> reprezentowana poprzez nawiasy kwadratowe '[ ]'. Elementy wchodzące w
+            skład listy, rozdzielone są przecinkami.</li>
+        <li>Wartością zmiennej może być również <b>słownik</b>, czyli lista par 'klucz' : 'wartość'. Symbolem słownika jest
+            nawias klamrowy '{}'. Elementami słownika są wspomniane pary 'klucz' : 'wartość', każda para rozdzielona jest
+            przecinkiem.</li>
+    </ul>
+
+    <p>
+        Jest to wystarczająca wiedza syntaktyczna o formacie YAML, aby móc sprawnie modyfikować pliki konfiguracyjne projektów. 
+        Ważnym jest aby podczas pracy z plikiem YAML przestrzegać wymienionych wyżej zasad, aby SLApp mógł poprawnie odczytać
+        modyfikacje naniesione przez użytkownika.
+    </p>
+
+    <p>
+        Zainteresowanych formatem YAML odsyłam do oficjalnej wyczerpującej dokumentacji języka : https://yaml.org/spec/1.2.2/
+    </p>
+
+    <p>
+        Każdy plik konfiguracyjny opatrzony jest opisowymi komentarzami, objaśniającymi znaczenie zmiennych dla aplikacji. Do edycji pliku konfiguracyjnego
+        wystarczy prosty edytor tekstowy (np. Notatnik). Po naniesieniu poprawek należy zastąpić poprzednią wersję pliku w odpowiednim folderze.
+    </p>
+
+    <p>
+        Pliki konfiguracyjne dostępne są w katalogu <b>configuration/projects/nazwa_projektu_configuration.yaml</b>.
+    </p>
+
+    <hr class="my-4">
+
+    <p><b>Poniżej znajduje się zawartość przykładowego pliku konfiguracyjnego dla projektu 'B'.</b></p>
+    <div class="overflow-auto my-2 mx-2 rounded border border-secondary" id="project_configuration">
+        <i># nazwa-skrót projektu</i><br>
+        <mark>project_name:</mark> BO<br>
+        <br>
+        <i># zmienne specyficzne dla umowy SLA projektu</i><br>
+        <mark>agreement:</mark><br>
+        &emsp;<i># słownik priorytetów oraz maksymalnych czasów w minutach na rozwiązanie zgłoszenia danego prioryetu (wyrażone w minutach)</i><br>
+        &emsp;<i># elementami słownika są pary klucz - priorytet zgłoszenia oraz wartość - czas na rozwiązanie zgłoszenia w minutach</i><br>
+        &emsp;<mark>priorities_total_time_map_per_ticket:</mark> {'A' : 120, 'B' : 360, 'C' : 1200} <br>
+        &emsp;<i># słownik priorytetów oraz maksymalnego całkowitego czasu dostępnego na rozwiązanie problemów danego priorytetu w trakcie miesiąca (wyrażone w minutach)</i><br>
+        &emsp;<i># elementami słownika są pary klucz - priorytet zgłoszenia oraz wartość - czas na rozwiązanie wszystkich zgłoszeń o danym priotytecie w przeciągu miesiąca (w minutach)</i><br>
+        &emsp;<mark>priorities_total_time_map_per_month:</mark> {'A' : 400}<br>
+        <br>
+        &emsp;<i># lista reprezentująca 'robocze' dni tygodnia, czyli te w trakcie których wykonawca jest rozliczany</i><br>
+        &emsp;<i># 1 - Mon, 2 - Tue, 3 - Wed, 4 - Th, 5 - Fri, 6 - Sat, 7 - Sun</i><br>
+        &emsp;<mark>working_days_of_week:</mark> [1,2,3,4,5,6,7] <br>
+        <br>
+        &emsp;<i># reprezentacja dnia oraz nocy na podstawie umowy</i><br>
+        &emsp;<i># reprezentacja nocy jest pozyskana z założenia, że koniec dnia jest początkiem nocy, a początek dnia
+            końcem nocy</i><br>
+        &emsp;<mark>day_schedule:</mark><br>
+        &emsp;&emsp;<mark>start_of_day:</mark><br>
+        &emsp;&emsp;&emsp;<mark>hour:</mark> 6<br>
+        &emsp;&emsp;&emsp;<mark>minutes:</mark> 0<br>
+        &emsp;&emsp;<mark>end_of_day:</mark><br>
+        &emsp;&emsp;&emsp;<mark>hour:</mark> 23<br>
+        &emsp;&emsp;&emsp;<mark>minutes:</mark> 59<br>
+        <br>
+        &emsp;<i># mnożnik liczonego czasu na rozwiązanie zgłoszeń w godzinach dziennych</i><br>
+        &emsp;<mark>day_time_factor:</mark> 1<br>
+        &emsp;<i># mnożnik liczonego czasu na rozwiązanie zgłoszeń w godzinach nocnych</i><br>
+        &emsp;<mark>night_time_factor:</mark> 0.2<br>
+        <br>
+        &emsp;<i># dokładność liczonego czasu (wyrażone w minutach)</i><br>
+        &emsp;<mark>significant_threshold:</mark> 1<br>
+        <br>
+        <i># zmienne specyficzne dla źródła pozyskiwania danych o zgłoszeniach</i><br>
+        <mark>api:</mark><br>
+        &emsp;<mark>endpoints:</mark><br>
+        &emsp;&emsp;<i># link pod którymi dostępne są informacje o liście zgłoszeń</i><br>
+        &emsp;&emsp;<mark>multiple_issues:</mark> https://bo-rdm.um.warszawa.pl/projects/sla/issues<br>
+        &emsp;&emsp;<i># link pod którymi dostępne są detaliczne informacje o jednym zgłoszeniu</i><br>
+        &emsp;&emsp;<mark>single_issue:</mark> https://bo-rdm.um.warszawa.pl/issues/<br>
+        &emsp;&emsp;<i># link pod którymi dostępne są informacje o uprawnionych uczestnikach projektu</i><br>
+        &emsp;&emsp;<mark>members:</mark> https://bo-rdm.um.warszawa.pl/projects/sla/memberships<br>
+        <br>
+        &emsp;<mark>role_id_of_teams:</mark><br>
+        &emsp;&emsp;<i># identyfikator roli grupy uczestników postrzeganych jako pracownicy urzędu</i><br>
+        &emsp;&emsp;<mark>our_team:</mark> 5<br>
+        &emsp;&emsp;<i># identyfikator roli grupy uczestników postrzeganych jako wykonawca</i><br>
+        &emsp;&emsp;<mark>contractor_team:</mark> 4<br>
+        <br>
+        &emsp;<mark>team_members:</mark><br>
+        &emsp;&emsp;<i># lista identyfikatorów poszczególnych uczestników postrzeganych jako pracownicy urzędu - alternatywa do stosowania identyfikatora grupy</i><br>
+        &emsp;&emsp;<mark>our_team:</mark> []<br>
+        &emsp;&emsp;<i># lista identyfikatorów poszczególnych uczestników postrzeganych jako wykonawca - alternatywa do stosowania identyfikatora grupy</i><br>
+        &emsp;&emsp;<mark>contractor_team:</mark> []<br>
+        <br>
+        &emsp;<mark>status_id:</mark><br>
+        &emsp;&emsp;<i># lista identyfikatorów statusów symbolizujących przejście odpowiedzialności nad zgłoszeniem z wykonawcy na pracowników urzędu</i><br>
+        &emsp;&emsp;<mark>halt:</mark> [28, 29, 5]<br>
+        <br>
+        <mark>path_names:</mark><br>
+        &emsp;<mark>input:</mark><br>
+        &emsp;&emsp;<i># ścieżka do folderu w którym program szuka raportów przekazanych przez użytkownika</i><br>
+        &emsp;&emsp;<mark>raport:</mark> data/input/raports/<br>
+        &emsp;&emsp;<i># ścieżka do folderu w którym program szuka wzorców - szablonów protokołów odbiorów</i><br>
+        &emsp; &emsp;<mark>protocol:</mark><i># dla projektów B funkcjonalność generowania protokołów odbioru jest niedostępna</i><br>
+        &emsp;<mark>output:</mark><br>
+        &emsp;&emsp;<i># scieżka folderu w którym program umieszcza gotową analizie</i><br>
+        &emsp;&emsp;<mark>analysis:</mark> data/output/<br>
+        &emsp;&emsp;<i># scieżka folderu w którym program umieszcza gotowy protokół odbioru</i><br>
+        &emsp;&emsp;<mark>protocol:</mark>data/output/<br>
+        &emsp;&emsp;<i># scieżka do pliku w którym można znaleźć nazwy zmiennych gotowych do wykorzystania w szablonach protokołów odbioru</i><br>
+        &emsp;&emsp;<mark>available_variables_for_protocols:</mark><i># dla projektów B funkcjonalność generowania protokołów odbioru jest niedostępna</i><br>
+        <br> 
+    </div>
+
+    <hr class="my-4">
+
+    <p><b>Praca z szablonami protokołów odbioru</b></p>
+
+    <p>
+        Użytkownikowi oferowana jest również edycja szablonów protokołów odbioru. Wzory protokołów odbioru wykorzystują
+        narzędzie Jinja 2 które pozwala na wstrzyknięcie wartości zmiennych do dokumentu. 
+    </p>
+
+    <p>
+        Pola w których miejsce zostaną wstrzyknięte wartości są oznaczone podwójnymi nawiasami klamrowymi.
+        Pomiędzy nawiasami znajduję się nazwa zmiennej której to wartość zostanie podmieniona po skorzystaniu z funkcjonalności
+        SLApp jaką jest generowanie protokołu odbioru.
+    </p>
+
+    <p>
+        Szablony protokołów odbioru dostępne są w folderze <b>protocols/templates/</b>. Użytkownik ma dowolność w edycji dokumentu oraz stosowania
+        wspomnianych zmiennych w wybranych przez niego miejscach.
+    </p>
+    <p>
+        Lista oferowanych przez SLApp zmiennych których użytkownik może użyć w procesie generowanie protokołu znajduje się w pliku
+        <b>protocols/variables.txt</b>.
+    </p>
+    <p>
+        Po naniesieniu poprawek na szablon protokołu odbioru plik należy zastąpić poprzednią wersję pliku w odpowiednim folderze.
+    </p>
+
+    <hr class="my-4">
+    
+    <p><b>Poniższy zrzut ekranu reprezentuję szablon protokołu odbioru dla projektu PIUW</b></p>
+
+    <img class="my-2 rounded border border-secondary" src="../static/images/documentation/protocol_schema_example.png">
+
+{% endblock %}

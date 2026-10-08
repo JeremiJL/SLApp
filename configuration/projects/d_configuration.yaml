@@ -1,0 +1,75 @@
+# nazwa-skrót projektu
+project_name: D
+
+# zmienne specyficzne dla umowy SLA projektu
+agreement:
+  # słownik priorytetów oraz maksymalnych czasów w minutach na rozwiązanie zgłoszenia danego priority (wyrażone w minutach)
+  # elementami słownika są pary klucz - priorytet zgłoszenia oraz wartość - czas na rozwiązanie zgłoszenia w minutach
+  priorities_total_time_map_per_ticket: {'A' : 240, 'B' : 720, 'C' : 1200}
+  # elementami słownika są pary klucz - priorytet zgłoszenia oraz wartość - czas na rozwiązanie wszystkich zgłoszeń o danym priorytecie w przeciągu miesiąca (w minutach)
+  # słownik priorytetów oraz maksymalnego całkowitego czasu dostępnego na rozwiązanie problemów danego priorytetu w trakcie miesiąca (wyrażone w minutach)
+  priorities_total_time_map_per_month: {'A' : 400}
+
+  # lista reprezentująca 'robocze' dni tygodnia, czyli te, w trakcie których wykonawca jest rozliczany
+  # 1 - Mon, 2 - Tue, 3 - Wed, 4 - Th, 5 - Fri, 6 - Sat, 7 - Sun
+  working_days_of_week: [1,2,3,4,5,6,7]
+
+  # reprezentacja dnia oraz nocy na podstawie umowy
+  # reprezentacja nocy jest pozyskana z założenia, że koniec dnia jest początkiem nocy, a początek dnia końcem nocy
+  day_schedule:
+    start_of_day:
+      hour: 6
+      minutes: 0
+    end_of_day:
+      hour: 23
+      minutes: 59
+
+  # mnożnik liczonego czasu na rozwiązanie zgłoszeń w godzinach dziennych
+  day_time_factor: 1
+  # mnożnik liczonego czasu na rozwiązanie zgłoszeń w godzinach nocnych
+  night_time_factor: 0.2
+
+  # dokładność liczonego czasu (wyrażone w minutach)
+  significant_threshold: 1
+
+# zmienne specyficzne dla źródła pozyskiwania danych o zgłoszeniach
+api:
+  endpoints:
+    # link pod którymi dostępne są informacje o liście zgłoszeń
+    multiple_issues: https://d
+    # link pod którymi dostępne są detaliczne informacje o jednym zgłoszeniu
+    single_issue: ?
+    # link pod którymi dostępne są informacje o uprawnionych uczestnikach projektu
+    members: https://d-members
+
+  role_id_of_teams:
+    # identyfikator roli grupy uczestników postrzeganych jako pracownicy urzędu
+    our_team: 5
+    # identyfikator roli grupy uczestników postrzeganych jako wykonawca
+    contractor_team: 4
+
+  team_members:
+    # lista identyfikatorów poszczególnych uczestników postrzeganych jako pracownicy urzędu - alternatywa do stosowania identyfikatora grupy
+    our_team: []
+    # lista identyfikatorów poszczególnych uczestników postrzeganych jako wykonawca - alternatywa do stosowania identyfikatora grupy
+    contractor_team:  []
+    
+  status_id:
+    # lista identyfikatorów statusów symbolizujących przejście odpowiedzialności nad zgłoszeniem z wykonawcy na pracowników urzędu
+    halt: [28, 29, 5]
+
+path_names:
+  input:
+    # ścieżka do folderu w którym program szuka raportów przekazanych przez użytkownika
+    raport: data/input/raports/
+    # ścieżka do folderu w którym program szuka wzorców - szablonów protokołów odbiorów
+    protocol: # dla projektów B funkcjonalność generowania protokołów odbioru jest niedostępna
+  output: 
+    # ścieżka folderu w którym program umieszcza gotową analizie
+    analysis: data/output/
+    # ścieżka folderu w którym program umieszcza gotowy protokół odbioru
+    protocol: data/output/
+    # ścieżka do pliku w którym można znaleźć nazwy zmiennych gotowych do wykorzystania w szablonach protokołów odbioru
+    available_variables_for_protocols: # dla projektów B funkcjonalność generowania protokołów odbioru jest niedostępna
+
+

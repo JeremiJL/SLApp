@@ -1,0 +1,130 @@
+:root {
+  --white: #ffffff;
+  --motive: #0064DC;
+  --alarming: #E62314;
+  --dark: #332D2D;
+  --light-motive: #AAD2FF;
+  --gray: #a7a7a7;
+  --light-noise-background: url("../images/light_noise_background.png")
+}
+
+@font-face {
+  font-family: 'Engram-Warsaw Medium';
+  src: url(../fonts/engram_warsaw/EngramWarsaw-Medium.ttf) format('truetype')
+}
+
+@font-face {
+  font-family: 'Engram-Warsaw Light';
+  src: url(../fonts/engram_warsaw/EngramWarsaw-Light.ttf) format('truetype')
+}
+
+@font-face {
+  font-family: 'Engram-Warsaw Bold';
+  src: url(../fonts/engram_warsaw/EngramWarsaw-Black.ttf) format('truetype')
+}
+
+body {
+  background-image: var(--light-noise-background);
+  height: 100dvh;
+  position: relative;
+}
+
+#footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+h1 {
+  font-size: 8rem;
+  font-family: 'Engram-Warsaw Bold';
+}
+
+h2, .btn {
+  font-family: 'Engram-Warsaw Medium';
+}
+
+h3 {
+  font-family: 'Engram-Warsaw Light';
+  color: var(--dark);
+  font-size: 1.5rem;
+}
+
+b {
+  color: var(--motive);
+}
+
+#nav_bottom {
+  font-family: 'Engram-Warsaw Light';
+  font-size: 1rem;
+}
+
+#nav_top {
+  font-size: 1rem;
+  font-family: 'Engram-Warsaw Bold';
+}
+
+#documentation-nav {
+  font-size: 1rem;
+  font-family: 'Engram-Warsaw Medium';
+}
+
+.documentation_content, main {
+  font-family: 'Engram-Warsaw Light';
+  font-size: 1.2rem;
+}
+
+.btn {
+  background-color: var(--motive);
+  color: var(--white);
+}
+
+#nav_title {
+  font-size: 2rem;
+  color: var(--motive);
+}
+
+#alarming_text {
+  color: var(--alarming);
+}
+
+#nav_bottom {
+  background-color: var(--motive);
+}
+
+#project_configuration {
+  max-height: 40rem;
+}
+
+#project_configuration {
+  color: var(--white);
+  background-color: var(--dark);
+  resize: none;
+  font-family: 'Engram-Warsaw Light';
+  font-size: smaller;
+  font-weight: 200;
+}
+
+.authors {
+  font-family: 'Engram-Warsaw Light';
+  font-size: smaller;
+  font-weight: 200;
+}
+
+mark {
+  color: var(--light-motive);
+  font-weight: 400;
+  background-color: transparent;
+}
+
+i {
+  color: var(--gray);
+  font-style: italic;
+}
+
+
+
+
+
+

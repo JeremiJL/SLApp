@@ -1,0 +1,57 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+    <div class="container-sm w-50 my-3">
+        
+        <h1 class="py-3 mb-2 text-center">SLApp</h1>
+
+        <p class="pt-2 text-center">
+            LadaCo 2 - program wyliczający dane o zgłoszeniach na podstawie umów SLA.
+            
+        </p>
+
+    </div>
+
+    <div class="container-sm w-50 my-5">
+
+            <div class="my-1 py-1">
+                <label for="color_picker" class="form-label">Pick color</label>
+                <input type="color" class="form-control form-control-color" id="color_picker" value="#0064DC" title="Pick color">
+            </div>
+    
+            <div class="my-1 py-1">
+                <button class="btn btn-dark" id="change_footer_color">Change footer color</button>
+            </div>
+    
+            <div class="my-1 py-1">
+                <button class="btn btn-dark" id="change_button_color">Change button color</button>
+            </div>
+    </div>
+
+    <div class="container-fluid text-center w-50 my-5 py-2">
+
+        <a class="btn btn-lg border-dark" href="{{ url_for('select_project') }}">Generuj analizie SLA</a>
+
+    </div>
+
+
+<script>
+
+    document.getElementById("change_footer_color").onclick = function change_footer_color(){
+        new_color = document.getElementById("color_picker").value;
+        document.getElementById("nav_bottom").style.backgroundColor = new_color;
+    }
+
+    document.getElementById("change_button_color").onclick = function change_footer_color() {
+        new_color = document.getElementById("color_picker").value
+
+        const buttons_list = document.getElementsByClassName("btn");
+        for (button of buttons_list){
+            button.style.backgroundColor = new_color
+        }
+    }
+
+</script>
+
+{% endblock %}

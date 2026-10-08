@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    {% include 'fragments/head.html' %}
+    
+    <body>
+
+       {% include 'fragments/navigation.html' %}
+
+        <main class="container-fluid mt-3 py-5">
+            {% block main %}{% endblock %}
+        </main>
+
+        <div id="footer-fixed">
+            {% include 'fragments/footer.html' %}
+        </div>
+
+    </body>
+</html>

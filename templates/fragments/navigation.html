@@ -1,0 +1,20 @@
+<nav id="nav_top" class="navbar navbar-expand-md navbar-light mb-auto">
+    <div class="container-fluid">
+        <a id="nav_title" class="navbar-brand" href="{{ url_for('home') }}">SLApp</a>
+
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item px-1">
+                    <a class="nav-link" href="{{ url_for('user_documentation') }}">Dokumentacja</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a class="nav-link" href="{{ url_for('about') }}">O Aplikacji</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a id="home_link" href="{{ url_for('home') }}"><img src="../static/images/home.svg" width="32px"
+                            height="32px"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

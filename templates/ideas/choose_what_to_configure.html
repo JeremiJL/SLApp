@@ -1,0 +1,28 @@
+{% extends 'blueprints/blueprint.html' %}
+
+{% block main %}
+
+<div class="container-sm w-50 text-center my-3">
+
+    <h2 class="py-3">CO CHCIAŁBYŚ/AŚ SKONFIGUROWAĆ?</h2>
+
+</div>
+
+<div class="container-sm w-25 justify-content-center my-5">
+    
+        <div class="text-center my-2 py-1">
+            <a href="{{ url_for('choose_protocol_template_for_configuration') }}" class="btn btn-lg btn-dark border-0 w-100" name="protocols">
+                Edytuj szablony protokołów odbioru
+            </a>
+        </div>
+
+        <div class="text-center my-2 py-1">
+            <a href="{{ url_for('choose_project_rules_for_cofiguration') }}" class="btn btn-lg btn-dark border-0 w-100" name="rules">
+                Edytuj zasady analizy SLA
+            </a>
+        </div>
+</div>
+
+
+
+{% endblock %}
